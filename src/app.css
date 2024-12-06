@@ -1,0 +1,44 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+@layer base {
+    :root {
+     --white: #fff;
+     --black: #000;
+     --accent: #007BFF;
+     /* token variables here */
+    }
+   
+    @media (prefers-color-scheme: dark) {
+     :root {
+      --text-color: var(--white);
+      --background-color: var(--black);
+      /* dark-specific variables */
+     }
+    }
+   
+    @media (prefers-color-scheme: light) {
+     :root {
+      --text-color: var(--black);
+      --background-color: var(--white);
+      /* light-specific variables */
+     }
+    }
+
+    html {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    [data-theme='light'] {
+        --text-color: var(--black);
+        --background-color: var(--white);
+    }
+
+    [data-theme='dark'] {
+        --text-color: var(--black);
+        --background-color: var(--white);
+    }
+   }
