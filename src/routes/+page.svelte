@@ -26,9 +26,14 @@
         switchTheme()
         })
     })
+
+    const toggleTheme = () => {
+        isDark = !isDark
+        switchTheme()
+    }
 </script>
 
-<button class="bg-white text-black" onclick={switchTheme}>switch theme</button>
+<button class="bg-white text-black" onclick={toggleTheme}>switch theme</button>
 
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
