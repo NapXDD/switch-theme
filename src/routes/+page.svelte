@@ -2,17 +2,26 @@
 	import { onMount } from "svelte";
     let isDark = $state(false)
     const switchTheme = () => {
-        console.log(isDark)
         if(isDark){
             document.documentElement.setAttribute('data-theme', 'light')
         } else {
             document.documentElement.setAttribute('data-theme', 'dark')
         }
-        isDark = !isDark
     }
 
     onMount(() => {
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
+
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change',({ matches }) => {
+        if (matches) {
+            isDark = true
+        } else {
+            isDark = false
+        }
+        switchTheme()
+        })
+
         if(prefersDarkMode.matches){
             isDark = true
         }
