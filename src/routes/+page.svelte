@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
     let isDark = $state(false)
     const switchTheme = () => {
+        console.log(isDark)
         if(isDark){
             document.documentElement.setAttribute('data-theme', 'light')
         } else {

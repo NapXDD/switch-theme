@@ -38,7 +38,7 @@
     }
 
     [data-theme='dark'] {
-        --text-color: var(--black);
-        --background-color: var(--white);
+        --text-color: var(--white);
+        --background-color: var(--black);
     }
    }
