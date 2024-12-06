@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { page } from "$app/stores";
 	import { onMount } from "svelte";
+	import { derived, get } from "svelte/store";
     let isDark = $state(false)
+    let theme = ['light', 'dark']
+    const queryParams = derived(page, ($page) => $page.url.searchParams);
+
     const switchTheme = () => {
         if(!isDark){
             document.documentElement.setAttribute('data-theme', 'light')
@@ -31,6 +36,24 @@
         isDark = !isDark
         switchTheme()
     }
+
+    onMount(() => {
+        const paramArr = Array.from(get(queryParams).entries())[0]
+        const paramKey = paramArr[0]
+        const paramValue = paramArr[1]
+        if(paramKey !== 'theme'){
+            return
+        }
+        if(!theme.includes(paramValue)){
+            document.documentElement.setAttribute('data-theme', '')
+        }
+        if(paramValue === 'dark'){
+            isDark = true
+        } else if(paramValue === 'light'){
+            isDark = false
+        }
+        switchTheme()
+    })
 </script>
 
 <button class="bg-white text-black" onclick={toggleTheme}>switch theme</button>
