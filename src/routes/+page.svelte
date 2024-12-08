@@ -4,7 +4,6 @@
 	import { derived, get } from "svelte/store";
     let isDark = $state(false)
     let theme = ['light', 'dark']
-    const queryParams = derived(page, ($page) => $page.url.searchParams);
 
     const switchTheme = () => {
         if(!isDark){
@@ -37,8 +36,9 @@
         switchTheme()
     }
 
-    onMount(() => {
-        const paramArr = Array.from(get(queryParams).entries())[0]
+    $effect(() => {
+        const paramArr = Array.from($page.url.searchParams.entries())[0]
+        if(!paramArr) return
         const paramKey = paramArr[0]
         const paramValue = paramArr[1]
         if(paramKey !== 'theme'){
@@ -57,7 +57,10 @@
 </script>
 
 <button class="bg-white text-black" onclick={toggleTheme}>switch theme</button>
-
+<br/>
+<a href="?theme=light">change to light theme</a>
+<br/>
+<a href="?theme=dark">change to dark theme</a>
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
